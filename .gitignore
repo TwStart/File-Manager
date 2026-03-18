@@ -1,0 +1,14 @@
+# Python (Archivos temporales de ejecución)
+__pycache__/
+*.py[cod]
+*$py.class
+
+dist/
+build/
+*.egg-info/
+
+venv/
+.env
+
+.pypirc
+test.py
