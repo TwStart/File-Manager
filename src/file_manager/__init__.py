@@ -14,3 +14,6 @@ def delete(path):
 
 def list_files(directories=None):
     return FileManager.list_files(directories)
+
+def move_files(source_path, destination_route):
+    return FileManager.move_files(source_path, destination_route)
