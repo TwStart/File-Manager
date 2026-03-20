@@ -21,7 +21,7 @@ class FileManager:
         """
 
         if len(name) > FileManager.MAX_NAME_LENGHT:
-            return False, f"Error: Name '{name}' exceeds {FileManager.MAX_NAME_LENGTH} characters."
+            return False, f"Error: Name '{name}' exceeds {FileManager.MAX_NAME_LENGHT} characters."
         if not name.strip():
             return False, f"Error: name cannot be empty."
         return True, None
