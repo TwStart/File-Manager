@@ -17,3 +17,6 @@ def list_files(directories=None):
 
 def move_files(source_path, destination_route):
     return FileManager.move_files(source_path, destination_route)
+
+def look_for(directory=None):
+    return FileManager.look_for(directory)

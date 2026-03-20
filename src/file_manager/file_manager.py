@@ -124,3 +124,31 @@ class FileManager:
 
         os.rename(source_path, destination_route)
         print(f"File successfully moved to: {destination_route}")
+
+    @staticmethod
+    def look_for(directory=None):
+        target = directory if directory else "."
+
+        if not os.path.exists(target):
+            return f"Error: The path {target} does not exist."
+        
+        print(f"--- Exploring all the content of: {os.path.abspath(target)} organized ---")
+
+        for root, dirs, files in os.walk(target):
+            
+            dirs.sort(key= str.lower)
+            files.sort(key= str.lower)
+
+            rel_path = os.path.relpath(root, target)
+            
+            if rel_path == ".":
+                level = 0
+            else:
+                level = rel_path.count(os.sep) + 1
+
+            indent = ' ' * 4 * level    
+            print(f"{indent}📁 [{os.path.basename(root)}/]")
+
+            sub_indent = ' ' * 4 * (level + 1)
+            for f in files:
+                print(f"{sub_indent}📄 {f}")
