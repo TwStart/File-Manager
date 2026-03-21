@@ -1,5 +1,6 @@
 import os
 from send2trash import send2trash
+import re
 
 class FileManager:
 
@@ -12,6 +13,7 @@ class FileManager:
     """
 
     MAX_NAME_LENGHT = 30
+    MIN_NAME_LENGHT = 5
     
     @staticmethod
     def _validate_name(name):
@@ -19,12 +21,17 @@ class FileManager:
         """
         validation of allowed characters for the name of a folder or file.
         """
-
+        name = name.strip()
+        if not name:
+            return False, f"Error: The name cannot be empty."
+        if len(name) < FileManager.MIN_NAME_LENGHT:
+            return False, f"Error: The name must be (at least {FileManager.MIN_NAME_LENGHT} characters.)"
         if len(name) > FileManager.MAX_NAME_LENGHT:
             return False, f"Error: Name '{name}' exceeds {FileManager.MAX_NAME_LENGHT} characters."
         if not name.strip():
             return False, f"Error: name cannot be empty."
-        return True, None
+        if re.search(r'[^a-zA-Z0-9._-]', name):
+            return False, "Error: The name contains prohibited characters (use only letters, numbers, periods or hyphens)."
 
     @staticmethod
     def create_folder(path_name):
