@@ -1,4 +1,5 @@
 import os
+import shutil
 from send2trash import send2trash
 import re
 
@@ -124,12 +125,16 @@ class FileManager:
         if not os.path.exists(source_path):
             raise FileNotFoundError(f"The source file does not exist: {source_path}")
         
+        if os.path.isdir(destination_route):
+            file_name = os.path.basename(source_path)
+            destination_route = os.path.join(destination_route, file_name)
+        
         directory = os.path.dirname(destination_route)
 
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
 
-        os.rename(source_path, destination_route)
+        shutil.move(source_path, destination_route)
         print(f"File successfully moved to: {destination_route}")
 
     @staticmethod
